@@ -1,0 +1,19 @@
+[Unit]
+Description=kali-mcp (servidor MCP para Claude)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Ajusta User y rutas a tu usuario de Kali:
+User=kali
+WorkingDirectory=/opt/kali-mcp
+Environment=KALI_MCP_HOST=0.0.0.0
+Environment=KALI_MCP_PORT=8765
+Environment=KALI_MCP_WORKDIR=/home/kali
+ExecStart=/opt/kali-mcp/.venv/bin/python /opt/kali-mcp/server.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
