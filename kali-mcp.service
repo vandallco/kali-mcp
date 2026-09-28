@@ -8,12 +8,14 @@ Type=simple
 # Ajusta User y rutas a tu usuario de Kali:
 User=kali
 WorkingDirectory=/opt/kali-mcp
-Environment=KALI_MCP_HOST=0.0.0.0
-Environment=KALI_MCP_PORT=8765
-Environment=KALI_MCP_WORKDIR=/home/kali
+# Token y configuración en un archivo aparte con permisos 600 (ver README):
+EnvironmentFile=/etc/kali-mcp.env
 ExecStart=/opt/kali-mcp/.venv/bin/python /opt/kali-mcp/server.py
 Restart=on-failure
 RestartSec=3
+# Endurecimiento básico de systemd
+NoNewPrivileges=true
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
